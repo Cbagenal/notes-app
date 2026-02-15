@@ -3,15 +3,21 @@ import { useState } from "react"
 
 interface Note {
   id: number
-  title: String,
-  content: String
+  title: string,
+  content: string
 }
 
 export default function NoteList({ notes }: {notes: Note[]}){
   const[selectedNote, setSelectedNote] = useState<number | null>(null);
 
   const handleClick = (id: number) => {
-    setSelectedNote(id)
+
+    if(id === selectedNote){
+      setSelectedNote(null);
+    } else {
+      setSelectedNote(id)
+    }
+
   }
 
   return(
@@ -20,7 +26,7 @@ export default function NoteList({ notes }: {notes: Note[]}){
       {notes.map((note) => (
         <div key={note.id}>
           <button className="cursor-pointer" onClick={() => handleClick(note.id)}>{note.title}</button>
-          {selectedNote === note.id && <p>{note.content}</p>}
+          {selectedNote === note.id && <p className="p-2 rounded-lg bg-neutral-700 text-white">{note.content}</p>}
         </div>
       ))}
     </div>

@@ -15,7 +15,7 @@ export default async function Home() {
           <input type="text" name="title" placeholder="Title" className="p-2 border-2 rounded-lg" />
           <textarea name="content" placeholder="Enter..." className="p-2 border-2 rounded-lg" />
         </div>
-        <button type="submit" className="bg-blue-500 py-1 rounded-lg text-white">Submit</button>
+        <button type="submit" className="bg-neutral-700 py-1 rounded-lg text-white">Submit</button>
       </form>
 
       <NoteList notes={notes}/>
