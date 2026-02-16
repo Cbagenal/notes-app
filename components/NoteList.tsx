@@ -1,34 +1,27 @@
-'use client'
-import { useState } from "react"
+// components/NoteList.tsx
+"use client";
+import { useState } from "react";
+import NoteItem from "./NoteItem";
 
 interface Note {
-  id: number
-  title: string,
-  content: string
+  id: number;
+  title: string;
+  content: string;
 }
 
-export default function NoteList({ notes }: {notes: Note[]}){
-  const[selectedNote, setSelectedNote] = useState<number | null>(null);
+export default function NoteList({ notes }: { notes: Note[] }) {
+  const [selectedNote, setSelectedNote] = useState<number | null>(null);
 
-  const handleClick = (id: number) => {
+  const handleToggle = (id: number) => {
+    setSelectedNote((prev) => (prev === id ? null : id));
+  };
 
-    if(id === selectedNote){
-      setSelectedNote(null);
-    } else {
-      setSelectedNote(id)
-    }
-
-  }
-
-  return(
+  return (
     <div className="flex flex-col gap-4 px-3">
       <p className="text-xl">Select a note</p>
       {notes.map((note) => (
-        <div key={note.id}>
-          <button className="cursor-pointer" onClick={() => handleClick(note.id)}>{note.title}</button>
-          {selectedNote === note.id && <p className="p-2 rounded-lg bg-neutral-700 text-white">{note.content}</p>}
-        </div>
+        <NoteItem key={note.id} note={note} isSelected={selectedNote === note.id} onToggle={() => handleToggle(note.id)}/>
       ))}
     </div>
-  )
+  );
 }
